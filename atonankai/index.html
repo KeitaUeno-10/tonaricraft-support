@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>あと何回 - 残りの人生を可視化する | Tonaricraft</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            color: #2c2c2e;
+            background: #fafafa;
+            line-height: 1.7;
+        }
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5ea;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo { font-size: 20px; font-weight: 700; color: #2c2c2e; text-decoration: none; }
+        nav a { color: #636366; text-decoration: none; font-size: 14px; margin-left: 24px; }
+        nav a:hover { color: #2c2c2e; }
+        .hero {
+            text-align: center;
+            padding: 80px 24px 48px;
+        }
+        .hero .emoji { font-size: 64px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .hero .subtitle { font-size: 16px; color: #636366; }
+        .content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        h2 { font-size: 20px; font-weight: 700; margin: 40px 0 16px; }
+        p { margin-bottom: 16px; font-size: 15px; color: #3a3a3c; }
+        .features { list-style: none; margin: 16px 0; }
+        .features li { padding: 12px 0; border-bottom: 1px solid #e5e5ea; font-size: 15px; }
+        .features li:last-child { border-bottom: none; }
+        .features .feat-icon { margin-right: 8px; }
+        .card-examples {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 24px 0;
+        }
+        .example-card {
+            background: #fff;
+            border: 1px solid #e5e5ea;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .example-card .card-emoji { font-size: 28px; }
+        .example-card .card-title { font-size: 13px; color: #636366; margin: 4px 0; }
+        .example-card .card-count { font-size: 22px; font-weight: 700; color: #2c2c2e; }
+        .example-card .card-sub { font-size: 11px; color: #8e8e93; }
+        .pricing {
+            background: #fff;
+            border: 1px solid #e5e5ea;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .pricing h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .pricing p { font-size: 14px; margin-bottom: 8px; }
+        .pricing .price { font-size: 24px; font-weight: 700; color: #007aff; }
+        .links { margin: 32px 0; }
+        .links a {
+            display: inline-block;
+            color: #007aff;
+            text-decoration: none;
+            font-size: 15px;
+            margin-right: 24px;
+        }
+        .links a:hover { text-decoration: underline; }
+        footer {
+            background: #fff;
+            border-top: 1px solid #e5e5ea;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #8e8e93;
+        }
+        footer a { color: #636366; text-decoration: none; margin: 0 12px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">Tonaricraft</a>
+            <nav>
+                <a href="/support.html">サポート</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="emoji">⏳</div>
+        <h1>あと何回</h1>
+        <div class="subtitle">残りの人生を可視化する</div>
+    </section>
+
+    <div class="content">
+        <p>あなたの時間は有限です。「桜を見るのはあと何回？」「父と会えるのはあと何回？」残りの人生を数字で見つめることで、日常の一つ一つを大切にするきっかけを作ります。</p>
+
+        <h2>こんなカードが並びます</h2>
+        <div class="card-examples">
+            <div class="example-card">
+                <div class="card-emoji">🌸</div>
+                <div class="card-title">桜を見る</div>
+                <div class="card-count">あと 43 回</div>
+                <div class="card-sub">年1回</div>
+            </div>
+            <div class="example-card">
+                <div class="card-emoji">👨</div>
+                <div class="card-title">父と会う</div>
+                <div class="card-count">あと 54 回</div>
+                <div class="card-sub">年6回</div>
+            </div>
+            <div class="example-card">
+                <div class="card-emoji">🍜</div>
+                <div class="card-title">ラーメンを食べる</div>
+                <div class="card-count">あと 2,150 回</div>
+                <div class="card-sub">年50回</div>
+            </div>
+            <div class="example-card">
+                <div class="card-emoji">✈️</div>
+                <div class="card-title">旅行に行く</div>
+                <div class="card-count">あと 86 回</div>
+                <div class="card-sub">年2回</div>
+            </div>
+        </div>
+
+        <h2>主な機能</h2>
+        <ul class="features">
+            <li><span class="feat-icon">📋</span>17種類のプリセットカード（人生・家族・季節・日常）</li>
+            <li><span class="feat-icon">✏️</span>自分だけのカスタムカードを作成</li>
+            <li><span class="feat-icon">📊</span>人生の進捗バーで可視化</li>
+            <li><span class="feat-icon">📤</span>カードを画像として共有（SNS対応）</li>
+            <li><span class="feat-icon">⚙️</span>頻度を自由にカスタマイズ</li>
+            <li><span class="feat-icon">🔒</span>完全オフライン — インターネット接続不要</li>
+        </ul>
+
+        <h2>料金</h2>
+        <div class="pricing">
+            <h3>無料版</h3>
+            <p>プリセットカード全表示。カスタムカードは3枚まで作成可能。</p>
+        </div>
+        <div class="pricing">
+            <h3>プレミアム（買い切り）</h3>
+            <p>カスタムカード無制限 + 共有画像のウォーターマーク除去</p>
+            <div class="price">&yen;320</div>
+            <p style="font-size: 12px; color: #8e8e93;">一度のお支払いで永続的にご利用いただけます。サブスクリプションではありません。</p>
+        </div>
+
+        <div class="links">
+            <a href="/atonankai/privacy.html">プライバシーポリシー</a>
+            <a href="/support.html">サポート</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="/">トップ</a>
+            <a href="/support.html">サポート</a>
+            <a href="mailto:support@tonaricraft.com">お問い合わせ</a>
+        </p>
+        <p style="margin-top: 12px;">&copy; 2026 Tonaricraft</p>
+    </footer>
+</body>
+</html>

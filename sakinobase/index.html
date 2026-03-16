@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>先延ばしToDo - 過去の自分が、今の自分を煽ってくる | Tonaricraft</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            color: #2c2c2e;
+            background: #fafafa;
+            line-height: 1.7;
+        }
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5ea;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo { font-size: 20px; font-weight: 700; color: #2c2c2e; text-decoration: none; }
+        nav a { color: #636366; text-decoration: none; font-size: 14px; margin-left: 24px; }
+        nav a:hover { color: #2c2c2e; }
+        .hero {
+            text-align: center;
+            padding: 80px 24px 48px;
+        }
+        .hero .emoji { font-size: 64px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .hero .subtitle { font-size: 16px; color: #636366; }
+        .content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        h2 { font-size: 20px; font-weight: 700; margin: 40px 0 16px; }
+        p { margin-bottom: 16px; font-size: 15px; color: #3a3a3c; }
+        .features { list-style: none; margin: 16px 0; }
+        .features li { padding: 12px 0; border-bottom: 1px solid #e5e5ea; font-size: 15px; }
+        .features li:last-child { border-bottom: none; }
+        .features .feat-icon { margin-right: 8px; }
+        .timeline {
+            background: #fff;
+            border: 1px solid #e5e5ea;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+        .timeline-title {
+            font-weight: 700;
+            font-size: 13px;
+            color: #8e8e93;
+            margin-bottom: 16px;
+        }
+        .timeline-item {
+            padding: 8px 0;
+            border-left: 2px solid #e5e5ea;
+            padding-left: 16px;
+            margin-bottom: 8px;
+        }
+        .timeline-item .date { font-size: 12px; color: #8e8e93; }
+        .timeline-item .message { font-size: 14px; color: #3a3a3c; }
+        .pricing {
+            background: #fff;
+            border: 1px solid #e5e5ea;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .pricing h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .pricing p { font-size: 14px; margin-bottom: 8px; }
+        .pricing .price { font-size: 24px; font-weight: 700; color: #007aff; }
+        .links { margin: 32px 0; }
+        .links a {
+            display: inline-block;
+            color: #007aff;
+            text-decoration: none;
+            font-size: 15px;
+            margin-right: 24px;
+        }
+        .links a:hover { text-decoration: underline; }
+        footer {
+            background: #fff;
+            border-top: 1px solid #e5e5ea;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #8e8e93;
+        }
+        footer a { color: #636366; text-decoration: none; margin: 0 12px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">Tonaricraft</a>
+            <nav>
+                <a href="/support.html">サポート</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="emoji">📋</div>
+        <h1>先延ばしToDo</h1>
+        <div class="subtitle">過去の自分が、今の自分を煽ってくる</div>
+    </section>
+
+    <div class="content">
+        <p>ただのToDoアプリではありません。タスクを先延ばしにするたび、「未来の自分へのメッセージ」を残します。後から見返すと、過去の自分の言い訳が並ぶ — それが一番のモチベーションになります。</p>
+
+        <h2>先延ばし履歴の例</h2>
+        <div class="timeline">
+            <div class="timeline-title">「確定申告する」の先延ばし履歴（5回）</div>
+            <div class="timeline-item">
+                <div class="date">3/1（作成）</div>
+                <div class="message">「今週中にやろう」→ 期限: 3/7</div>
+            </div>
+            <div class="timeline-item">
+                <div class="date">3/7（1回目）</div>
+                <div class="message">「来週やる」→ 期限: 3/14</div>
+            </div>
+            <div class="timeline-item">
+                <div class="date">3/14（2回目）</div>
+                <div class="message">「今月中には...」→ 期限: 3/31</div>
+            </div>
+            <div class="timeline-item">
+                <div class="date">3/28（3回目）</div>
+                <div class="message">「もう無理かも」→ 期限: 4/7</div>
+            </div>
+            <div class="timeline-item">
+                <div class="date">4/5（4回目）</div>
+                <div class="message">「なんで3/1にやらなかったんだ...」→ 期限: 4/10</div>
+            </div>
+        </div>
+
+        <h2>主な機能</h2>
+        <ul class="features">
+            <li><span class="feat-icon">📝</span>タスクの追加・編集・完了管理（カテゴリ分け対応）</li>
+            <li><span class="feat-icon">⏰</span>先延ばしメッセージ — 「未来の自分に一言」を記録</li>
+            <li><span class="feat-icon">📜</span>先延ばし履歴のタイムライン表示</li>
+            <li><span class="feat-icon">🏆</span>先延ばしランク（S〜初心者）— ユーモアある自己分析</li>
+            <li><span class="feat-icon">📊</span>統計・分析（最多曜日、平均完了日数など）</li>
+            <li><span class="feat-icon">🎉</span>タスク完了時の振り返り画面</li>
+            <li><span class="feat-icon">📤</span>分析結果を画像として共有</li>
+            <li><span class="feat-icon">🔔</span>期限日のリマインド通知</li>
+            <li><span class="feat-icon">🔒</span>完全オフライン — インターネット接続不要</li>
+        </ul>
+
+        <h2>料金</h2>
+        <div class="pricing">
+            <h3>無料版</h3>
+            <p>タスク10個まで。分析は直近1ヶ月のみ。</p>
+        </div>
+        <div class="pricing">
+            <h3>プレミアム（買い切り）</h3>
+            <p>タスク無制限 + 全期間の分析 + 共有画像のウォーターマーク除去</p>
+            <div class="price">&yen;480</div>
+            <p style="font-size: 12px; color: #8e8e93;">一度のお支払いで永続的にご利用いただけます。サブスクリプションではありません。</p>
+        </div>
+
+        <div class="links">
+            <a href="/sakinobase/privacy.html">プライバシーポリシー</a>
+            <a href="/support.html">サポート</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="/">トップ</a>
+            <a href="/support.html">サポート</a>
+            <a href="mailto:support@tonaricraft.com">お問い合わせ</a>
+        </p>
+        <p style="margin-top: 12px;">&copy; 2026 Tonaricraft</p>
+    </footer>
+</body>
+</html>

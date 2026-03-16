@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>つながり帳 - 人間関係を温かく管理 | Tonaricraft</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            color: #2c2c2e;
+            background: #fafafa;
+            line-height: 1.7;
+        }
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5ea;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo { font-size: 20px; font-weight: 700; color: #2c2c2e; text-decoration: none; }
+        nav a { color: #636366; text-decoration: none; font-size: 14px; margin-left: 24px; }
+        nav a:hover { color: #2c2c2e; }
+        .hero {
+            text-align: center;
+            padding: 80px 24px 48px;
+        }
+        .hero .emoji { font-size: 64px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .hero .subtitle { font-size: 16px; color: #636366; }
+        .content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        h2 { font-size: 20px; font-weight: 700; margin: 40px 0 16px; }
+        p { margin-bottom: 16px; font-size: 15px; color: #3a3a3c; }
+        .features {
+            list-style: none;
+            margin: 16px 0;
+        }
+        .features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e5ea;
+            font-size: 15px;
+        }
+        .features li:last-child { border-bottom: none; }
+        .features .feat-icon { margin-right: 8px; }
+        .pricing {
+            background: #fff;
+            border: 1px solid #e5e5ea;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .pricing h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .pricing p { font-size: 14px; margin-bottom: 8px; }
+        .pricing .price { font-size: 24px; font-weight: 700; color: #007aff; }
+        .links { margin: 32px 0; }
+        .links a {
+            display: inline-block;
+            color: #007aff;
+            text-decoration: none;
+            font-size: 15px;
+            margin-right: 24px;
+        }
+        .links a:hover { text-decoration: underline; }
+        footer {
+            background: #fff;
+            border-top: 1px solid #e5e5ea;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #8e8e93;
+        }
+        footer a { color: #636366; text-decoration: none; margin: 0 12px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">Tonaricraft</a>
+            <nav>
+                <a href="/support.html">サポート</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="emoji">🤝</div>
+        <h1>つながり帳</h1>
+        <div class="subtitle">人間関係を温かく管理</div>
+    </section>
+
+    <div class="content">
+        <p>つながり帳は、大切な人との関係を一冊の手帳のように管理するアプリです。誕生日・記念日・贈答履歴・会った記録をまとめて記録し、人とのつながりを大事にするお手伝いをします。</p>
+
+        <h2>主な機能</h2>
+        <ul class="features">
+            <li><span class="feat-icon">👤</span>人物の登録・管理（名前、ふりがな、関係性、誕生日、メモ、写真）</li>
+            <li><span class="feat-icon">📅</span>会った記録の管理（日付とメモ）</li>
+            <li><span class="feat-icon">🎂</span>記念日の管理（毎年リマインド対応）</li>
+            <li><span class="feat-icon">🎁</span>贈答記録の管理（あげた/もらった、金額、お返し管理）</li>
+            <li><span class="feat-icon">🔔</span>誕生日・記念日のリマインド通知</li>
+            <li><span class="feat-icon">📊</span>カレンダー表示・イベントリスト</li>
+            <li><span class="feat-icon">🔒</span>完全オフライン — インターネット接続不要</li>
+        </ul>
+
+        <h2>料金</h2>
+        <div class="pricing">
+            <h3>無料版</h3>
+            <p>人物10人まで登録可能。すべての基本機能が使えます。</p>
+        </div>
+        <div class="pricing">
+            <h3>プレミアム（買い切り）</h3>
+            <p>人物の登録数が無制限になります。</p>
+            <div class="price">&yen;480</div>
+            <p style="font-size: 12px; color: #8e8e93;">一度のお支払いで永続的にご利用いただけます。サブスクリプションではありません。</p>
+        </div>
+
+        <div class="links">
+            <a href="/tsunagari/privacy.html">プライバシーポリシー</a>
+            <a href="/support.html">サポート</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="/">トップ</a>
+            <a href="/support.html">サポート</a>
+            <a href="mailto:support@tonaricraft.com">お問い合わせ</a>
+        </p>
+        <p style="margin-top: 12px;">&copy; 2026 Tonaricraft</p>
+    </footer>
+</body>
+</html>
