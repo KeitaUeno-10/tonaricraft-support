@@ -4,17 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サポート - Tonaricraft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #5B8A72;
+            --primary-light: #7BA896;
+            --secondary: #F5E6D3;
+            --bg: #FAFAF7;
+            --bg-warm: #F7F3EE;
+            --text: #2C2C2C;
+            --text-light: #6B6560;
+            --accent: #E8927C;
+            --card: #FFFFFF;
+            --border: #E8E4DF;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-            color: #2c2c2e;
-            background: #fafafa;
-            line-height: 1.7;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            -webkit-font-smoothing: antialiased;
         }
         header {
-            background: #fff;
-            border-bottom: 1px solid #e5e5ea;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
             padding: 16px 24px;
             position: sticky;
             top: 0;
@@ -28,75 +44,116 @@
             justify-content: space-between;
         }
         .logo {
+            font-family: 'Noto Serif JP', serif;
             font-size: 20px;
-            font-weight: 700;
-            color: #2c2c2e;
+            font-weight: 600;
+            color: var(--text);
             text-decoration: none;
         }
-        nav a {
-            color: #636366;
+        header nav a {
+            color: var(--text-light);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
             margin-left: 24px;
+            transition: color 0.3s;
         }
-        nav a:hover { color: #2c2c2e; }
+        header nav a:hover { color: var(--primary); }
         .content {
             max-width: 640px;
             margin: 0 auto;
-            padding: 60px 24px 80px;
+            padding: 3rem 1.5rem 4rem;
         }
         h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 32px;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.06em;
+            margin-bottom: 2rem;
         }
         h2 {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 32px 0 12px;
-        }
-        p { margin-bottom: 16px; color: #3a3a3c; font-size: 15px; }
-        a.mail-link {
-            color: #007aff;
-            text-decoration: none;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.15rem;
             font-weight: 600;
+            color: var(--primary);
+            margin: 2rem 0 0.8rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--secondary);
         }
-        a.mail-link:hover { text-decoration: underline; }
+        p { margin-bottom: 1rem; font-size: 0.92rem; color: var(--text); }
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 12px rgba(91,138,114,0.25);
+        }
+        .contact-btn:hover { background: var(--primary-light); transform: translateY(-1px); }
+        .contact-btn svg {
+            width: 18px; height: 18px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .email-copy { margin-top: 0.8rem; font-size: 0.82rem; color: var(--text-light); }
+        .email-copy code {
+            background: var(--secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: var(--text);
+            user-select: all;
+        }
         .app-list {
             list-style: none;
-            margin: 16px 0;
+            margin: 1rem 0;
         }
         .app-list li {
-            margin-bottom: 8px;
+            margin-bottom: 0.6rem;
         }
         .app-list a {
-            color: #007aff;
+            color: var(--primary);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        .app-list a:hover { text-decoration: underline; }
-        .note {
-            background: #f2f2f7;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 32px;
-            font-size: 14px;
-            color: #636366;
+        .app-list a:hover { color: var(--primary-light); text-decoration: underline; }
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
         }
-        footer {
-            background: #fff;
-            border-top: 1px solid #e5e5ea;
-            padding: 24px;
+        .card.highlight {
+            background: linear-gradient(135deg, var(--card) 0%, #F0F7F3 100%);
+            border-color: var(--primary-light);
+        }
+        .card p { margin-bottom: 0; font-size: 0.88rem; color: var(--text-light); }
+        .footer {
             text-align: center;
-            font-size: 13px;
-            color: #8e8e93;
+            padding: 2rem 1.5rem;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--border);
         }
-        footer a {
-            color: #636366;
+        .footer p { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.3rem; }
+        .footer a {
+            color: var(--text-light);
             text-decoration: none;
-            margin: 0 12px;
+            margin: 0 0.8rem;
+            transition: color 0.3s;
         }
-        footer a:hover { text-decoration: underline; }
+        .footer a:hover { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -114,7 +171,16 @@
 
         <h2>お問い合わせ</h2>
         <p>アプリに関するご質問、不具合の報告、ご要望などは下記メールアドレスまでお気軽にご連絡ください。</p>
-        <p><a href="mailto:support@tonaricraft.com" class="mail-link">support@tonaricraft.com</a></p>
+
+        <a href="mailto:support@tonaricraft.com" class="contact-btn">
+            <svg viewBox="0 0 24 24">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M22 4L12 13L2 4"/>
+            </svg>
+            メールでお問い合わせ
+        </a>
+        <p class="email-copy">メールアプリが開かない場合: <code>support@tonaricraft.com</code></p>
+
         <p>通常2〜3営業日以内にご返信いたします。お問い合わせの際は、ご利用のアプリ名・iOSバージョン・症状をお書き添えいただけると、より迅速に対応できます。</p>
 
         <h2>対象アプリ</h2>
@@ -136,17 +202,17 @@
         <p>すべてのアプリの課金は買い切り型（一度のお支払い）です。サブスクリプション（月額・年額課金）はありません。</p>
         <p>購入の復元は、各アプリの設定画面またはプレミアム画面の「購入を復元」ボタンから行えます。</p>
 
-        <div class="note">
-            Tonaricraftのすべてのアプリは完全オフラインで動作します。インターネットに接続せず、データは端末内のみに保存されます。アカウント登録も不要です。
+        <div class="card highlight">
+            <p>Tonaricraftのすべてのアプリは完全オフラインで動作します。インターネットに接続せず、データは端末内のみに保存されます。アカウント登録も不要です。</p>
         </div>
     </div>
 
-    <footer>
+    <div class="footer">
         <p>
             <a href="/">トップ</a>
             <a href="mailto:support@tonaricraft.com">お問い合わせ</a>
         </p>
-        <p style="margin-top: 12px;">&copy; 2026 Tonaricraft</p>
-    </footer>
+        <p style="margin-top: 0.8rem;">&copy; 2026 Tonaricraft</p>
+    </div>
 </body>
 </html>

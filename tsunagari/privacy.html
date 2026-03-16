@@ -4,17 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>プライバシーポリシー - つながり帳 | Tonaricraft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #5B8A72;
+            --primary-light: #7BA896;
+            --secondary: #F5E6D3;
+            --bg: #FAFAF7;
+            --bg-warm: #F7F3EE;
+            --text: #2C2C2C;
+            --text-light: #6B6560;
+            --accent: #E8927C;
+            --card: #FFFFFF;
+            --border: #E8E4DF;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-            color: #2c2c2e;
-            background: #fafafa;
-            line-height: 1.8;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            -webkit-font-smoothing: antialiased;
         }
         header {
-            background: #fff;
-            border-bottom: 1px solid #e5e5ea;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
             padding: 16px 24px;
             position: sticky;
             top: 0;
@@ -27,38 +43,77 @@
             align-items: center;
             justify-content: space-between;
         }
-        .logo { font-size: 20px; font-weight: 700; color: #2c2c2e; text-decoration: none; }
-        nav a { color: #636366; text-decoration: none; font-size: 14px; margin-left: 24px; }
-        nav a:hover { color: #2c2c2e; }
+        .logo {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+        }
+        header nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 24px;
+            transition: color 0.3s;
+        }
+        header nav a:hover { color: var(--primary); }
         .content {
             max-width: 640px;
             margin: 0 auto;
-            padding: 60px 24px 80px;
+            padding: 3rem 1.5rem 4rem;
         }
-        h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-        .app-name { font-size: 14px; color: #8e8e93; margin-bottom: 32px; }
-        .updated { font-size: 13px; color: #8e8e93; margin-bottom: 32px; }
-        h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; }
-        p { margin-bottom: 16px; font-size: 15px; color: #3a3a3c; }
-        ul { margin: 0 0 16px 24px; font-size: 15px; color: #3a3a3c; }
-        li { margin-bottom: 6px; }
-        .highlight {
-            background: #f2f2f7;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 24px 0;
-            font-size: 14px;
+        h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.06em;
+            margin-bottom: 0.5rem;
         }
-        footer {
-            background: #fff;
-            border-top: 1px solid #e5e5ea;
-            padding: 24px;
+        .app-name { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.3rem; }
+        .updated { font-size: 0.82rem; color: var(--text-light); margin-bottom: 2rem; }
+        h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 2rem 0 0.8rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--secondary);
+        }
+        p { margin-bottom: 1rem; font-size: 0.92rem; color: var(--text); }
+        ul { margin: 0 0 1rem 1.5rem; font-size: 0.92rem; color: var(--text); }
+        li { margin-bottom: 0.4rem; }
+        a { color: var(--primary); }
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+        .card.highlight {
+            background: linear-gradient(135deg, var(--card) 0%, #F0F7F3 100%);
+            border-color: var(--primary-light);
+        }
+        .card p { margin-bottom: 0; }
+        .footer {
             text-align: center;
-            font-size: 13px;
-            color: #8e8e93;
+            padding: 2rem 1.5rem;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--border);
         }
-        footer a { color: #636366; text-decoration: none; margin: 0 12px; }
-        footer a:hover { text-decoration: underline; }
+        .footer p { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.3rem; }
+        .footer a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            transition: color 0.3s;
+        }
+        .footer a:hover { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -77,8 +132,8 @@
         <div class="app-name">つながり帳（Tsunagari）</div>
         <div class="updated">最終更新日: 2026年3月16日</div>
 
-        <div class="highlight">
-            <strong>つながり帳はインターネットに一切接続しません。</strong>すべてのデータはお使いの端末内のみに保存され、外部のサーバーに送信されることはありません。
+        <div class="card highlight">
+            <p><strong>つながり帳はインターネットに一切接続しません。</strong>すべてのデータはお使いの端末内のみに保存され、外部のサーバーに送信されることはありません。</p>
         </div>
 
         <h2>1. 収集するデータ</h2>
@@ -119,16 +174,16 @@
         <h2>9. お問い合わせ</h2>
         <p>プライバシーに関するご質問は、下記までご連絡ください。</p>
         <p><strong>Tonaricraft</strong><br>
-        メール: <a href="mailto:support@tonaricraft.com" style="color: #007aff;">support@tonaricraft.com</a></p>
+        メール: <a href="mailto:support@tonaricraft.com">support@tonaricraft.com</a></p>
     </div>
 
-    <footer>
+    <div class="footer">
         <p>
             <a href="/">トップ</a>
             <a href="/tsunagari/">つながり帳</a>
             <a href="/support.html">サポート</a>
         </p>
-        <p style="margin-top: 12px;">&copy; 2026 Tonaricraft</p>
-    </footer>
+        <p style="margin-top: 0.8rem;">&copy; 2026 Tonaricraft</p>
+    </div>
 </body>
 </html>
