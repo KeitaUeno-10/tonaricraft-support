@@ -3,221 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tonaricraft - 自分の人生に向き合うツールを作る</title>
+    <meta name="description" content="TonariCraft は、アーティスト・小規模事業・個人プロジェクト向けに、更新しやすく運用しやすいWebサイトを実装します。">
+    <title>TonariCraft - Webサイト実装・運用サポート</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@500;600&amp;display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #5B8A72;
-            --primary-light: #7BA896;
-            --secondary: #F5E6D3;
-            --bg: #FAFAF7;
-            --bg-warm: #F7F3EE;
-            --text: #2C2C2C;
-            --text-light: #6B6560;
-            --accent: #E8927C;
-            --card: #FFFFFF;
-            --border: #E8E4DF;
+            --bg: #f8f7f4;
+            --surface: #ffffff;
+            --surface-muted: #f0eee8;
+            --text: #242322;
+            --muted: #66615b;
+            --soft: #8a837a;
+            --line: #ded9cf;
+            --accent: #315f62;
+            --accent-dark: #25494b;
+            --accent-soft: #e1eceb;
+            --warm: #b6784f;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Zen Maru Gothic', sans-serif;
-            background-color: var(--bg);
+            background: var(--bg);
             color: var(--text);
-            line-height: 1.9;
+            font-family: "Noto Sans JP", sans-serif;
+            line-height: 1.85;
             -webkit-font-smoothing: antialiased;
         }
+
+        a { color: inherit; }
+
         header {
-            background: var(--card);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
+            background: rgba(248, 247, 244, 0.92);
+            border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 20;
+            backdrop-filter: blur(14px);
         }
+
         .header-inner {
-            max-width: 960px;
+            max-width: 1120px;
             margin: 0 auto;
+            padding: 18px 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 24px;
         }
+
         .logo {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 20px;
+            font-family: "Noto Serif JP", serif;
+            font-size: 21px;
             font-weight: 600;
-            color: var(--text);
+            letter-spacing: 0;
             text-decoration: none;
         }
-        header nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.9rem;
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            color: var(--muted);
+            font-size: 14px;
             font-weight: 500;
-            margin-left: 24px;
-            transition: color 0.3s;
         }
-        header nav a:hover { color: var(--primary); }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
         .hero {
-            background: linear-gradient(160deg, var(--secondary) 0%, var(--bg-warm) 50%, var(--bg) 100%);
-            text-align: center;
-            padding: 5rem 1.5rem 3.5rem;
-            position: relative;
+            padding: 92px 0 72px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+            gap: 56px;
+            align-items: end;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: "Noto Serif JP", serif;
+            font-size: clamp(36px, 6vw, 68px);
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 1.2;
+            max-width: 760px;
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 18px;
+            max-width: 660px;
+            margin-top: 26px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-top: 34px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            border-radius: 6px;
+            padding: 0 20px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .button:hover { background: var(--accent-dark); }
+
+        .text-link {
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .text-link:hover { text-decoration: underline; }
+
+        .capability-panel {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+        }
+
+        .capability-panel p {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: var(--accent-soft);
+            border-radius: 999px;
+            color: var(--accent-dark);
+            display: inline-flex;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.4;
+            padding: 7px 11px;
+        }
+
+        section {
+            padding: 78px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+            gap: 36px;
+            align-items: start;
+            margin-bottom: 32px;
+        }
+
+        .section-heading h2 {
+            font-family: "Noto Serif JP", serif;
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1.35;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            max-width: 700px;
+        }
+
+        .work-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 260px;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -40%; right: -20%;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(91,138,114,0.08) 0%, transparent 70%);
-            border-radius: 50%;
+
+        .work-body {
+            padding: 34px;
         }
-        .hero h1 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.8rem;
+
+        .work-body h3 {
+            font-family: "Noto Serif JP", serif;
+            font-size: 28px;
             font-weight: 600;
-            color: var(--text);
-            letter-spacing: 0.08em;
-            margin-bottom: 0.8rem;
+            line-height: 1.35;
+            margin-bottom: 12px;
         }
-        .hero p {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            max-width: 480px;
-            margin: 0 auto;
+
+        .work-body p {
+            color: var(--muted);
+            margin-bottom: 20px;
+            max-width: 720px;
         }
-        .apps {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 2.5rem 1.5rem 4rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
+
+        .work-meta {
+            background: var(--surface-muted);
+            border-left: 1px solid var(--line);
+            padding: 34px 28px;
         }
-        .app-card {
-            background: var(--card);
-            border-radius: 14px;
-            padding: 2rem 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 8px rgba(0,0,0,0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .app-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(91,138,114,0.12);
-        }
-        .app-emoji {
-            font-size: 48px;
-            margin-bottom: 1rem;
-        }
-        .app-card h2 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.4rem;
-        }
-        .app-card .subtitle {
-            font-size: 0.82rem;
-            color: var(--text-light);
-            margin-bottom: 0.8rem;
-        }
-        .app-card p {
-            font-size: 0.88rem;
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-        .app-badge {
-            display: inline-block;
-            font-size: 0.72rem;
+
+        .meta-label {
+            color: var(--soft);
+            font-size: 12px;
             font-weight: 700;
-            background: var(--secondary);
-            color: var(--text-light);
-            padding: 0.25rem 0.7rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
-        .brand-note {
+
+        .work-meta p {
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.75;
+            margin-bottom: 18px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .contact {
+            background: var(--surface-muted);
+            border-bottom: 0;
+        }
+
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .contact-box h2 {
+            font-family: "Noto Serif JP", serif;
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            max-width: 680px;
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            color: var(--soft);
+            font-size: 13px;
+            padding: 28px;
             text-align: center;
-            padding: 2rem 1.5rem 3rem;
-            color: var(--text-light);
-            font-size: 0.88rem;
-            max-width: 520px;
-            margin: 0 auto;
         }
-        .footer {
-            text-align: center;
-            padding: 2rem 1.5rem;
-            background: var(--bg-warm);
-            border-top: 1px solid var(--border);
+
+        @media (max-width: 760px) {
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 16px 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 14px;
+                font-size: 13px;
+            }
+
+            .container { padding: 0 20px; }
+
+            .hero { padding: 64px 0 50px; }
+
+            .hero-grid,
+            .section-heading,
+            .work-card,
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .capability-panel,
+            .work-body,
+            .work-meta,
+            .contact-box {
+                padding: 24px;
+            }
+
+            .work-meta {
+                border-left: 0;
+                border-top: 1px solid var(--line);
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section { padding: 56px 0; }
         }
-        .footer p { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.3rem; }
-        .footer a {
-            color: var(--text-light);
-            text-decoration: none;
-            margin: 0 0.8rem;
-            transition: color 0.3s;
-        }
-        .footer a:hover { color: var(--primary); }
     </style>
 </head>
 <body>
     <header>
         <div class="header-inner">
-            <a href="/" class="logo">Tonaricraft</a>
-            <nav>
-                <a href="/support.html">サポート</a>
+            <a href="/" class="logo">TonariCraft</a>
+            <nav aria-label="主要ナビゲーション">
+                <a href="#works">Works</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <h1>自分の人生に向き合うツールを作る</h1>
-        <p>Tonaricraftは、日常の大切なことを見つめ直すためのアプリを開発しています。すべてのアプリは完全オフラインで動作し、あなたのプライバシーを守ります。</p>
-    </section>
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <div class="eyebrow">Web implementation and operation support</div>
+                    <h1>小さなチームのための、更新しやすいWebサイト実装</h1>
+                    <p class="lead">TonariCraft は、アーティスト・小規模事業・個人プロジェクト向けに、更新しやすく運用しやすいWebサイトを実装します。</p>
+                    <div class="hero-actions">
+                        <a class="button" href="mailto:support@tonaricraft.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87">制作について相談する</a>
+                        <a class="text-link" href="#works">実績を見る</a>
+                    </div>
+                </div>
+                <aside class="capability-panel" aria-label="対応範囲">
+                    <p>デザインの再現、管理画面、SEO、Cloudflare Workers での公開まで、実装と運用に必要な部分をまとめて支援します。</p>
+                    <div class="tag-list">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Cloudflare</span>
+                        <span class="tag">管理画面</span>
+                        <span class="tag">SEO</span>
+                        <span class="tag">運用改善</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
 
-    <section class="apps">
-        <a href="/tsunagari/" class="app-card">
-            <div class="app-emoji">🤝</div>
-            <h2>つながり帳</h2>
-            <div class="subtitle">人間関係を温かく管理</div>
-            <p>誕生日・記念日・贈答・会った記録をオフラインで管理。大切な人との関係を可視化し、つながりを大事にするためのアプリです。</p>
-            <span class="app-badge">iOS / オフライン / 買い切り</span>
-        </a>
+        <section id="works">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Works</h2>
+                    <p>公開後もニュースやライブ情報を更新し続けられることを重視して、必要な管理機能と公開環境を整えています。</p>
+                </div>
 
-        <a href="/atonankai/" class="app-card">
-            <div class="app-emoji">⏳</div>
-            <h2>あと何回</h2>
-            <div class="subtitle">残りの人生を可視化する</div>
-            <p>「桜を見るのはあと何回？」「父と会えるのはあと何回？」残りの人生を数字で見つめることで、日常の行動を大切にするきっかけを作ります。</p>
-            <span class="app-badge">iOS / オフライン / 無料+買い切り</span>
-        </a>
+                <article class="work-card">
+                    <div class="work-body">
+                        <h3>幻想痛 公式サイト</h3>
+                        <p>バンド公式サイトの構築、管理画面、ライブ・ニュース・グッズ・動画管理、SEO設定、Cloudflare Workers でのデプロイと運用を担当しています。</p>
+                        <a class="text-link" href="https://gensotsu.com" target="_blank" rel="noopener noreferrer">https://gensotsu.com</a>
+                    </div>
+                    <div class="work-meta">
+                        <div class="meta-label">Scope</div>
+                        <p>News / Live / Discography / Video / Goods の管理画面、SEO、Cloudflare Workers 運用</p>
+                        <div class="meta-label">Client type</div>
+                        <p>アーティスト・バンド公式サイト</p>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-        <a href="/sakinobase/" class="app-card">
-            <div class="app-emoji">📋</div>
-            <h2>先延ばしToDo</h2>
-            <div class="subtitle">過去の自分が、今の自分を煽ってくる</div>
-            <p>タスクを先延ばしするたびに「未来の自分へのメッセージ」を記録。過去の自分との対話を通じて、先延ばし習慣を見つめ直すToDoアプリです。</p>
-            <span class="app-badge">iOS / オフライン / 無料+買い切り</span>
-        </a>
-    </section>
+        <section id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Services</h2>
+                    <p>新規制作だけでなく、既存サイトの改善や公開後の小さな運用相談にも対応します。価格表ではなく、内容を聞いて必要な範囲を絞って進めます。</p>
+                </div>
 
-    <div class="brand-note">
-        すべてのアプリはインターネットに接続しません。<br>
-        データは端末内のみに保存され、外部に送信されることはありません。
-    </div>
+                <div class="service-grid">
+                    <article class="service-card">
+                        <h3>Webサイト実装</h3>
+                        <p>デザインや要件に合わせて、読みやすく更新しやすいWebサイトを実装します。</p>
+                    </article>
+                    <article class="service-card">
+                        <h3>管理画面付きサイト</h3>
+                        <p>News、Live、Goods など、日々の更新が必要な情報を管理できる仕組みを整えます。</p>
+                    </article>
+                    <article class="service-card">
+                        <h3>既存サイト改善</h3>
+                        <p>表示崩れ、速度、SEO、更新しづらさなど、運用で困っている部分を整理して改善します。</p>
+                    </article>
+                    <article class="service-card">
+                        <h3>Cloudflare / Next.js デプロイ・運用</h3>
+                        <p>Cloudflare Workers や Next.js の公開、環境変数、ドメイン、継続運用の整備を支援します。</p>
+                    </article>
+                    <article class="service-card">
+                        <h3>SEO / Search Console 初期設定</h3>
+                        <p>メタ情報、構造化データ、サイトマップ、Search Console 登録など、公開時に必要な初期設定を行います。</p>
+                    </article>
+                    <article class="service-card">
+                        <h3>運用サポート</h3>
+                        <p>公開後の更新、軽微な改修、管理画面の改善などを必要なタイミングで相談できます。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-    <div class="footer">
-        <p>
-            <a href="/support.html">サポート</a>
-            <a href="mailto:support@tonaricraft.com">お問い合わせ</a>
-        </p>
-        <p style="margin-top: 0.8rem;">&copy; 2026 Tonaricraft</p>
-    </div>
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-box">
+                    <div>
+                        <h2>制作について相談する</h2>
+                        <p>新規制作、既存サイト改善、管理画面やCloudflare運用の相談など、決まっている範囲だけで構いません。まずはメールで概要をお送りください。</p>
+                    </div>
+                    <a class="button" href="mailto:support@tonaricraft.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87">メールで問い合わせる</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 TonariCraft
+    </footer>
 </body>
 </html>
