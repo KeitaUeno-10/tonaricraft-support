@@ -11,7 +11,7 @@ trap cleanup EXIT
 
 mkdir -p "$DEPLOY_DIR/assets" "$DEPLOY_DIR/atonankai" "$DEPLOY_DIR/sakinobase" "$DEPLOY_DIR/tsunagari"
 
-cp "$ROOT_DIR/index.html" "$ROOT_DIR/support.html" "$DEPLOY_DIR/"
+cp "$ROOT_DIR/index.html" "$ROOT_DIR/support.html" "$ROOT_DIR/robots.txt" "$ROOT_DIR/sitemap.xml" "$DEPLOY_DIR/"
 cp "$ROOT_DIR/assets/gensotsu-preview.mp4" "$DEPLOY_DIR/assets/"
 cp "$ROOT_DIR/atonankai/index.html" "$ROOT_DIR/atonankai/privacy.html" "$DEPLOY_DIR/atonankai/"
 cp "$ROOT_DIR/sakinobase/index.html" "$ROOT_DIR/sakinobase/privacy.html" "$DEPLOY_DIR/sakinobase/"
