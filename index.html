@@ -94,14 +94,8 @@
 
   .works { padding: clamp(3rem, 7vh, 6rem) 0; }
   .case { display: grid; grid-template-columns: 1.1fr .9fr; gap: 0; border: 1px solid var(--line); background: var(--paper); overflow: hidden; }
-  .case .preview { position: relative; background: var(--dark); min-height: 420px; overflow: hidden; display: flex; align-items: flex-end; padding: 1.6rem; }
-  .case .preview video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .74; filter: saturate(.9) contrast(1.05); }
-  .case .preview .shade { position: absolute; inset: 0; background: radial-gradient(38% 50% at 62% 40%, rgba(243, 178, 119, .26), transparent 62%), linear-gradient(180deg, rgba(14, 18, 25, .12), rgba(14, 18, 25, .82)); }
-  .case .preview .pgrid { position: absolute; inset: 0; opacity: .45; background: repeating-linear-gradient(90deg, rgba(150, 180, 205, .05) 0 24px, transparent 24px 48px), repeating-linear-gradient(0deg, rgba(150, 180, 205, .05) 0 24px, transparent 24px 48px); }
-  .case .preview .pnav { position: absolute; top: 1.2rem; left: 1.6rem; right: 1.6rem; display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: .52rem; letter-spacing: .18em; color: rgba(236, 240, 245, .72); text-transform: uppercase; z-index: 2; }
-  .case .preview .pname { position: relative; z-index: 2; font-family: var(--min); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4rem); color: #eef3f7; line-height: .9; letter-spacing: .03em; transition: transform .6s cubic-bezier(.16, .8, .24, 1); text-shadow: 0 10px 40px rgba(0, 0, 0, .45); }
-  .case:hover .preview .pname { transform: translateY(-6px); }
-  .case .preview .pro { position: relative; z-index: 2; font-family: var(--mono); font-size: .6rem; letter-spacing: .4em; color: #f3b277; margin-top: .5rem; }
+  .case .preview { position: relative; background: var(--dark); min-height: 420px; overflow: hidden; }
+  .case .preview video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; }
   .case .info { padding: clamp(1.8rem, 3vw, 3rem); display: flex; flex-direction: column; }
   .case .info .k { font-family: var(--mono); font-size: .6rem; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; }
   .case .info h3 { font-family: var(--min); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 2rem); margin: .6rem 0 1rem; }
@@ -168,7 +162,6 @@
     nav .links { display: none; }
     nav .brand { font-size: 1.2rem; }
     .hero h1 { font-size: clamp(3rem, 17vw, 5.6rem); }
-    .case .preview .pnav { align-items: flex-start; flex-direction: column; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -214,9 +207,6 @@
       <article class="case reveal">
         <div class="preview">
           <video src="/assets/gensotsu-preview.mp4" autoplay muted loop playsinline preload="metadata" aria-label="幻想痛公式サイトのスクリーン録画"></video>
-          <div class="shade"></div><div class="pgrid"></div>
-          <div class="pnav"><span>幻想痛</span><span>Videos / News / Live / Profile</span></div>
-          <div><div class="pname">幻想痛</div><div class="pro">G E N S O T S U</div></div>
         </div>
         <div class="info">
           <span class="k">Official Website</span>
