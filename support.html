@@ -143,6 +143,103 @@
 
         .button:hover { background: var(--accent-dark); }
 
+        .contact-form {
+            display: grid;
+            gap: 18px;
+            margin-top: 28px;
+        }
+
+        .form-row {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .field span,
+        .consent {
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        input,
+        select,
+        textarea {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            color: var(--text);
+            font: inherit;
+            min-height: 48px;
+            padding: 11px 13px;
+            width: 100%;
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--accent);
+            outline: 2px solid rgba(49, 95, 98, 0.16);
+        }
+
+        .consent {
+            align-items: flex-start;
+            display: flex;
+            gap: 10px;
+            line-height: 1.7;
+        }
+
+        .consent input {
+            flex: 0 0 auto;
+            height: 20px;
+            min-height: 20px;
+            margin-top: 3px;
+            width: 20px;
+        }
+
+        .consent a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .form-message {
+            border-radius: 6px;
+            display: none;
+            font-size: 14px;
+            padding: 12px 14px;
+        }
+
+        .form-message.is-error {
+            background: #fff0ed;
+            color: #943a2f;
+            display: block;
+        }
+
+        .form-message.is-success {
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+            display: block;
+        }
+
+        .hp-field {
+            height: 1px;
+            left: -9999px;
+            overflow: hidden;
+            position: absolute;
+            width: 1px;
+        }
+
         .mail {
             background: var(--accent-soft);
             border-radius: 6px;
@@ -189,6 +286,10 @@
             .contact-card {
                 padding: 24px;
             }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -211,15 +312,56 @@
             <p>新規制作、既存サイト改善、更新できるサイト、公開後の運用相談など、決まっている範囲だけで構いません。まずは概要をメールでお送りください。</p>
         </div>
 
-        <section class="contact-card">
-            <h2>メールで問い合わせる</h2>
+        <section class="contact-card" id="contact-form">
+            <h2>フォームで問い合わせる</h2>
             <p>通常2〜3営業日以内に返信します。サイトURL、相談したい内容、希望時期、現在困っていることがあれば添えてください。</p>
-            <a class="button" href="mailto:support@tonaricraft.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87">メールを作成する</a>
+            <form class="contact-form" id="contactForm" action="/api/contact" method="post">
+                <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+
+                <div class="form-row">
+                    <label class="field">
+                        <span>お名前 *</span>
+                        <input type="text" name="name" autocomplete="name" maxlength="100" required>
+                    </label>
+                    <label class="field">
+                        <span>メールアドレス *</span>
+                        <input type="email" name="email" autocomplete="email" maxlength="200" required>
+                    </label>
+                </div>
+
+                <label class="field">
+                    <span>相談内容 *</span>
+                    <select name="category" required>
+                        <option value="">選択してください</option>
+                        <option value="新規サイト制作">新規サイト制作</option>
+                        <option value="既存サイト改善">既存サイト改善</option>
+                        <option value="更新できる仕組み">更新できる仕組み</option>
+                        <option value="公開・Cloudflare運用">公開・Cloudflare運用</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </label>
+
+                <label class="field">
+                    <span>本文 *</span>
+                    <textarea name="message" maxlength="5000" required placeholder="相談したい内容、現在のサイトURL、希望時期など"></textarea>
+                </label>
+
+                <div class="hp-field" aria-hidden="true">
+                    <label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+                </div>
+
+                <label class="consent">
+                    <input type="checkbox" name="privacyConsent" required>
+                    <span><a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>に同意しました</span>
+                </label>
+
+                <button class="button" type="submit">送信する</button>
+            </form>
             <div class="mail">support@tonaricraft.com</div>
         </section>
 
         <div class="note">
-            フォームは設置していないため、このページ上で個人情報を保存する仕組みはありません。メールで送信された内容は、問い合わせ対応のために利用します。
+            送信内容は問い合わせ対応のために保存し、通知メールとして support@tonaricraft.com 宛に送信します。
             <ul>
                 <li>新規制作やリニューアルの相談</li>
                 <li>更新できる仕組み、検索で見つけてもらうための基本設定</li>
@@ -231,5 +373,45 @@
     <footer>
         &copy; 2026 TonariCraft
     </footer>
+
+    <script>
+        (function() {
+            "use strict";
+
+            const form = document.getElementById("contactForm");
+            const message = document.getElementById("formMessage");
+            const submit = form.querySelector('button[type="submit"]');
+
+            function show(text, type) {
+                message.textContent = text;
+                message.className = "form-message " + (type === "error" ? "is-error" : "is-success");
+            }
+
+            form.addEventListener("submit", async function(event) {
+                event.preventDefault();
+                message.className = "form-message";
+                submit.disabled = true;
+                submit.textContent = "送信中...";
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: "POST",
+                        body: new FormData(form),
+                    });
+                    const result = await response.json().catch(() => ({}));
+                    if (!response.ok || !result.ok) {
+                        throw new Error(result.error || "送信に失敗しました。時間をおいて再度お試しください。");
+                    }
+                    form.reset();
+                    show("お問い合わせありがとうございます。内容を確認のうえ、折り返しご連絡します。", "success");
+                } catch (error) {
+                    show(error instanceof Error ? error.message : "送信に失敗しました。", "error");
+                } finally {
+                    submit.disabled = false;
+                    submit.textContent = "送信する";
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
