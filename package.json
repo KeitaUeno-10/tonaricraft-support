@@ -1,0 +1,10 @@
+{
+  "name": "tonaricraft-support",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "check": "git diff --check",
+    "deploy": "bash scripts/deploy.sh",
+    "deploy:dry-run": "bash scripts/deploy.sh --dry-run"
+  }
+}
