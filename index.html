@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="TonariCraft は、世界観のあるWebサイトをデザインから実装、公開後の運用まで支援する制作窓口です。">
+<meta name="description" content="TonariCraft は、Webサイト制作、実装、管理画面、SEO、Cloudflareでの公開・運用を支援する制作窓口です。">
 <title>TonariCraft - Web Design &amp; Implementation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,8 @@
     --ink: #171b1c;
     --muted: #68706c;
     --line: rgba(23, 27, 28, .13);
-    --accent: #8f4d34;
-    --accent-2: #285a64;
+    --accent: #3f635f;
+    --accent-2: #284f5a;
     --dark: #172325;
     --dark-ink: #f2f1ea;
     --dark-muted: #a8b0aa;
@@ -63,57 +63,28 @@
   nav .links a { transition: color .25s; }
   nav .links a:hover { color: var(--ink); }
 
-  .hero {
-    isolation: isolate;
-    min-height: 100vh;
-    overflow: hidden;
-    padding: clamp(7rem, 13vh, 10rem) 0 clamp(4rem, 8vh, 7rem);
-    position: relative;
-  }
-
-  .hero::after {
-    background: linear-gradient(90deg, rgba(238, 240, 236, .97) 0%, rgba(238, 240, 236, .84) 42%, rgba(238, 240, 236, .36) 78%, rgba(238, 240, 236, .18) 100%);
-    content: "";
-    inset: 0;
-    position: absolute;
-    z-index: -1;
-  }
-
-  .hero-media {
-    bottom: 0;
-    left: 44%;
-    opacity: .28;
-    position: absolute;
-    right: -8%;
-    top: 0;
-    z-index: -2;
-  }
-
-  .hero-media video {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
-  }
+  .hero { border-bottom: 1px solid var(--line); min-height: 78vh; padding: clamp(7rem, 14vh, 10rem) 0 clamp(4rem, 9vh, 7rem); }
 
   .hero-grid {
     align-items: end;
     display: grid;
-    gap: clamp(3rem, 8vw, 8rem);
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
-    min-height: calc(100vh - 13rem);
+    gap: clamp(2.5rem, 7vw, 6rem);
+    grid-template-columns: minmax(0, 760px) minmax(240px, 360px);
+    min-height: calc(78vh - 12rem);
   }
 
   .hero h1 {
     font-family: var(--min);
-    font-size: clamp(3.6rem, 9vw, 9.4rem);
-    font-weight: 800;
+    font-size: clamp(2.4rem, 4.8vw, 4.8rem);
+    font-weight: 700;
     letter-spacing: 0;
-    line-height: .98;
+    line-height: 1.2;
     margin-top: 1.1rem;
-    max-width: 920px;
+    max-width: 820px;
   }
 
-  .hero h1 span { color: var(--accent); }
+  .hero h1 .line { display: block; }
+  .hero h1 .accent { color: var(--accent); }
   .hero .lead { color: var(--muted); font-size: clamp(.95rem, 1.4vw, 1.05rem); line-height: 2; margin-top: 1.8rem; max-width: 40rem; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
 
@@ -144,7 +115,7 @@
 
   section { padding: clamp(4.5rem, 10vh, 8rem) 0; position: relative; }
   .section-head { align-items: end; border-bottom: 1px solid var(--line); display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr) minmax(260px, 520px); margin-bottom: clamp(2rem, 5vw, 3.6rem); padding-bottom: 1.5rem; }
-  .section-head h2 { font-family: var(--fr); font-size: clamp(2.3rem, 5.5vw, 4.8rem); font-weight: 400; letter-spacing: 0; line-height: 1; }
+  .section-head h2 { font-family: var(--fr); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; letter-spacing: 0; line-height: 1.08; }
   .section-head p { color: var(--muted); font-size: .92rem; line-height: 1.9; }
 
   .works { background: var(--panel); }
@@ -153,7 +124,7 @@
   .work-media video { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; }
   .work-info { background: var(--panel); display: flex; flex-direction: column; padding: clamp(1.6rem, 4vw, 3rem); }
   .work-info .k { color: var(--accent); font-family: var(--mono); font-size: .62rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-  .work-info h3 { font-family: var(--min); font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.35; margin: .7rem 0 1rem; }
+  .work-info h3 { font-family: var(--min); font-size: clamp(1.35rem, 2.4vw, 1.9rem); line-height: 1.45; margin: .7rem 0 1rem; }
   .work-info p { color: var(--muted); font-size: .92rem; line-height: 1.95; }
   .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.4rem 0 2rem; }
   .tags span { border: 1px solid var(--line); color: var(--ink); font-family: var(--mono); font-size: .58rem; letter-spacing: .06em; padding: .45rem .7rem; }
@@ -180,7 +151,7 @@
 
   .contact { background: var(--panel); }
   .contact-box { align-items: end; border: 1px solid var(--line); display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr) auto; padding: clamp(1.6rem, 4vw, 3rem); }
-  .contact-box h2 { font-family: var(--min); font-size: clamp(2rem, 5vw, 4.4rem); line-height: 1.15; }
+  .contact-box h2 { font-family: var(--min); font-size: clamp(1.8rem, 4vw, 3.4rem); line-height: 1.25; }
   .contact-box h2 span { color: var(--accent); }
   .contact-box p { color: var(--muted); font-size: .95rem; line-height: 1.9; margin-top: 1.2rem; max-width: 40rem; }
 
@@ -189,7 +160,6 @@
   footer .brand { color: var(--ink); font-family: var(--fr); font-size: 1.05rem; letter-spacing: 0; }
 
   @media (max-width: 900px) {
-    .hero-media { left: 18%; opacity: .16; }
     .hero-grid, .section-head, .work-card, .contact-box { grid-template-columns: 1fr; }
     .hero-note { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; padding-top: 1rem; }
     .work-media { min-height: 360px; }
@@ -201,9 +171,8 @@
   @media (max-width: 680px) {
     nav .links { display: none; }
     nav .brand { font-size: 1.16rem; }
-    .hero { min-height: 92vh; }
-    .hero h1 { font-size: clamp(3.1rem, 16vw, 5.4rem); }
-    .hero-media { left: 0; opacity: .1; }
+    .hero { min-height: auto; }
+    .hero h1 { font-size: clamp(2.35rem, 11vw, 3.8rem); }
     .work-media { min-height: 260px; }
     .work-meta { grid-template-columns: 1fr; }
     .service { grid-template-columns: 1fr; }
@@ -224,20 +193,17 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-media" aria-hidden="true">
-    <video src="/assets/gensotsu-preview.mp4" autoplay muted loop playsinline preload="metadata"></video>
-  </div>
   <div class="col hero-grid">
     <div>
       <p class="eyebrow">Web Design / Implementation / Operation</p>
-      <h1>世界観を、<br>更新できる<span>Webへ。</span></h1>
-      <p class="lead">TonariCraft は、アーティスト・小規模事業・個人プロジェクト向けに、見た目の空気感と公開後の運用しやすさを両立したWebサイトを制作します。</p>
+      <h1><span class="line">Webサイト制作</span><span class="line accent">運用サポート</span></h1>
+      <p class="lead">TonariCraft は、アーティスト・小規模事業・個人プロジェクト向けに、更新しやすいWebサイトを設計・実装します。管理画面、SEO、Cloudflareでの公開まで、必要な範囲を支援します。</p>
       <div class="hero-actions">
         <a class="btn fill" href="#contact">制作を相談する</a>
         <a class="btn line" href="#works">実績を見る</a>
       </div>
     </div>
-    <p class="hero-note">デザイン、実装、管理画面、SEO、Cloudflare Workers での公開まで。必要な部分だけを切り出して相談できます。</p>
+    <p class="hero-note">大きな制作会社ではなく、小さく相談しながら進める制作窓口です。新規制作も、既存サイトの改善も対応します。</p>
   </div>
 </header>
 
@@ -247,9 +213,9 @@
       <div class="section-head reveal">
         <div>
           <p class="eyebrow">Selected Work</p>
-          <h2>幻想痛 公式サイト</h2>
+          <h2>Works</h2>
         </div>
-        <p>まず見せるべきものは、言葉より実際に動いているサイト。実績を主役にして、TonariCraft が何を作れるかが伝わる構成にしています。</p>
+        <p>公開・運用中の制作事例です。見た目だけでなく、更新のしやすさと公開後の運用まで含めて制作しています。</p>
       </div>
 
       <article class="work-card reveal">
@@ -258,8 +224,8 @@
         </div>
         <div class="work-info">
           <span class="k">Official Website</span>
-          <h3>バンドの世界観を、そのまま更新できる公式サイトへ。</h3>
-          <p>News / Live / Discography / Video / Goods を管理できる公式サイトを制作。世界観のあるトップ、日々更新できる管理画面、検索に見つけてもらうためのSEO、Cloudflare Workers での公開と運用まで担当しています。</p>
+          <h3>幻想痛 公式サイト</h3>
+          <p>News / Live / Discography / Video / Goods を管理できるバンド公式サイトを制作。更新用の管理画面、SEO設定、Cloudflare Workers での公開と運用まで担当しています。</p>
           <div class="tags"><span>Web Design</span><span>Next.js</span><span>Admin</span><span>SEO</span><span>Cloudflare</span></div>
           <div class="work-meta">
             <div>Client<b>アーティスト / バンド</b></div>
@@ -279,11 +245,11 @@
           <p class="eyebrow">Services</p>
           <h2>できること</h2>
         </div>
-        <p>派手なプラン表ではなく、必要な作業を整理して小さく始められる制作窓口です。</p>
+        <p>最初から大きく作り込まず、必要な範囲を整理して進めます。</p>
       </div>
 
       <div class="service-list">
-        <div class="service reveal"><span class="n">01</span><h3>Webサイト制作</h3><p>ブランドや活動の空気感に合わせて、読みやすく、印象に残るサイトをデザインから実装します。</p></div>
+        <div class="service reveal"><span class="n">01</span><h3>Webサイト制作</h3><p>目的と掲載内容を整理し、読みやすく更新しやすいサイトをデザインから実装します。</p></div>
         <div class="service reveal"><span class="n">02</span><h3>管理画面付きサイト</h3><p>ニュース、ライブ情報、グッズ、動画などを自分たちで更新できる仕組みを整えます。</p></div>
         <div class="service reveal"><span class="n">03</span><h3>既存サイト改善</h3><p>表示崩れ、速度、スマホ表示、更新しづらさなど、運用中に気になる部分を改善します。</p></div>
         <div class="service reveal"><span class="n">04</span><h3>公開・運用サポート</h3><p>Cloudflare Workers / Next.js のデプロイ、ドメイン、Search Console、SEOの初期設定まで対応します。</p></div>
@@ -298,13 +264,13 @@
           <p class="eyebrow">Process</p>
           <h2>進め方</h2>
         </div>
-        <p>作って終わりではなく、公開後に更新できるところまでを制作範囲として考えます。</p>
+        <p>制作前の整理から、公開後の更新・改善までを見越して進めます。</p>
       </div>
 
       <div class="process-grid">
-        <div class="process-card reveal"><span class="n">01 / Direction</span><h3>目的と世界観を整理</h3><p>誰に何を伝えるサイトか、どこを更新したいかを最初に整理します。</p></div>
-        <div class="process-card reveal"><span class="n">02 / Build</span><h3>デザインから実装まで一貫</h3><p>見た目の意図が実装で薄まらないよう、細部まで同じ視点で作ります。</p></div>
-        <div class="process-card reveal"><span class="n">03 / Operate</span><h3>公開後の運用まで支援</h3><p>更新、軽微な改修、SEOや表示の改善を必要なタイミングで相談できます。</p></div>
+        <div class="process-card reveal"><span class="n">01 / Direction</span><h3>要件と更新内容を整理</h3><p>誰に何を伝えるか、どの情報を自分たちで更新したいかを確認します。</p></div>
+        <div class="process-card reveal"><span class="n">02 / Build</span><h3>実装と公開準備</h3><p>ページ、管理画面、SEO、ドメインやCloudflareの設定まで整えます。</p></div>
+        <div class="process-card reveal"><span class="n">03 / Operate</span><h3>公開後の改善</h3><p>更新、軽微な改修、表示や検索まわりの改善を必要なタイミングで相談できます。</p></div>
       </div>
     </div>
   </section>
@@ -314,8 +280,8 @@
       <div class="contact-box reveal">
         <div>
           <p class="eyebrow">Contact</p>
-          <h2>つくりたいものを、<br>聞かせて<span>ください。</span></h2>
-          <p>新しく作りたい方も、今のサイトを直したい方も。まだ漠然としていても大丈夫です。まずはやりたいことをメールでお送りください。</p>
+          <h2>まずは相談内容を<br>お送りください。</h2>
+          <p>新規制作、既存サイト改善、管理画面やCloudflare運用の相談など、決まっている範囲だけで構いません。</p>
         </div>
         <a class="btn fill" href="mailto:support@tonaricraft.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87">メールで相談する</a>
       </div>
