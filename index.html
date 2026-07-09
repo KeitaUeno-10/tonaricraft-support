@@ -1,478 +1,345 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TonariCraft は、アーティスト・小規模事業・個人プロジェクト向けに、更新しやすく運用しやすいWebサイトを実装します。">
-    <title>TonariCraft - Webサイト実装・運用サポート</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@500;600&amp;display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #f8f7f4;
-            --surface: #ffffff;
-            --surface-muted: #f0eee8;
-            --text: #242322;
-            --muted: #66615b;
-            --soft: #8a837a;
-            --line: #ded9cf;
-            --accent: #315f62;
-            --accent-dark: #25494b;
-            --accent-soft: #e1eceb;
-            --warm: #b6784f;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TonariCraft は、世界観のあるWebサイトをデザインから実装、公開後の運用まで支援するWeb Design Studioです。">
+<title>TonariCraft - Web Design Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&amp;family=Shippori+Mincho:wght@600;700;800&amp;family=Space+Mono:wght@400;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f0e7;
+    --paper-2: #ebe4d6;
+    --ink: #16140d;
+    --muted: #736d5f;
+    --line: rgba(22, 20, 13, .12);
+    --accent: #d8431f;
+    --accent-ink: #b8371a;
+    --dark: #131210;
+    --dark-paper: #ece6d9;
+    --dark-muted: #8f887a;
+    --dark-line: rgba(236, 230, 217, .14);
+    --fr: "Fraunces", serif;
+    --min: "Shippori Mincho", serif;
+    --mono: "Space Mono", monospace;
+    --sans: "Zen Kaku Gothic New", system-ui, sans-serif;
+  }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); overflow-x: hidden; line-height: 1.5; }
+  ::selection { background: var(--accent); color: #fff; }
+  a { color: inherit; text-decoration: none; }
 
-        html { scroll-behavior: smooth; }
+  .eyebrow { font-family: var(--mono); font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent-ink); }
+  .col { max-width: 1280px; margin-inline: auto; padding-inline: clamp(1.3rem, 4vw, 4rem); }
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: "Noto Sans JP", sans-serif;
-            line-height: 1.85;
-            -webkit-font-smoothing: antialiased;
-        }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(.16, .8, .24, 1), transform 1s cubic-bezier(.16, .8, .24, 1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .wipe { clip-path: inset(0 0 100% 0); transition: clip-path 1.1s cubic-bezier(.16, .8, .24, 1); }
+  .wipe.in { clip-path: inset(0 0 -10% 0); }
 
-        a { color: inherit; }
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem clamp(1.3rem, 4vw, 4rem);
+    transition: padding .4s, background .4s, border-color .4s;
+    border-bottom: 1px solid transparent;
+  }
 
-        header {
-            background: rgba(248, 247, 244, 0.92);
-            border-bottom: 1px solid var(--line);
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(14px);
-        }
+  nav.scrolled { padding: .85rem clamp(1.3rem, 4vw, 4rem); background: rgba(244, 240, 231, .82); backdrop-filter: blur(12px); border-color: var(--line); }
+  nav .brand { font-family: var(--fr); font-weight: 500; font-size: 1.35rem; letter-spacing: 0; }
+  nav .brand b { color: var(--accent); }
+  nav .links { display: flex; gap: 2rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+  nav .links a { position: relative; padding: .2em 0; color: var(--muted); transition: color .3s; }
+  nav .links a:hover { color: var(--ink); }
+  nav .links a::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px; background: var(--accent); transition: width .3s; }
+  nav .links a:hover::after { width: 100%; }
 
-        .header-inner {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 18px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
+  .hero-wrap { height: 165vh; position: relative; }
+  .hero { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  .hero .glow { position: absolute; width: 70vw; height: 70vw; right: -15vw; top: -20vw; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgba(216, 67, 31, .14), transparent 70%); will-change: transform; }
+  .hero .content { position: relative; z-index: 2; }
+  .hero .fr-line { font-family: var(--fr); font-style: italic; font-weight: 400; font-size: clamp(1.1rem, 2.4vw, 1.8rem); color: var(--accent-ink); margin: .9rem 0 .4rem; letter-spacing: 0; }
+  .hero h1 { font-family: var(--min); font-weight: 800; font-size: clamp(3.2rem, 10.5vw, 11rem); line-height: .94; letter-spacing: 0; will-change: transform; }
+  .hero h1 .a { color: var(--accent); }
+  .hero .sub { max-width: 34em; margin-top: 1.8rem; color: var(--muted); font-size: clamp(.9rem, 1.1vw, 1rem); line-height: 1.9; will-change: opacity, transform; }
+  .hero .cta { display: flex; gap: 1rem; margin-top: 2.2rem; flex-wrap: wrap; will-change: opacity, transform; }
+  .btn { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; padding: 1em 2em; border-radius: 0; transition: .3s; display: inline-block; }
+  .btn.fill { background: var(--ink); color: var(--paper); }
+  .btn.fill:hover { background: var(--accent); }
+  .btn.line { border: 1px solid var(--ink); }
+  .btn.line:hover { background: var(--ink); color: var(--paper); }
+  .scrollcue { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: .6rem; letter-spacing: .3em; color: var(--muted); text-transform: uppercase; will-change: opacity; }
+  .scrollcue::after { content: ""; display: block; width: 1px; height: 34px; background: var(--muted); margin: .6rem auto 0; opacity: .5; }
 
-        .logo {
-            font-family: "Noto Serif JP", serif;
-            font-size: 21px;
-            font-weight: 600;
-            letter-spacing: 0;
-            text-decoration: none;
-        }
+  section { position: relative; }
+  .shead { display: flex; align-items: baseline; gap: 1.2rem; margin-bottom: clamp(2.5rem, 5vh, 4rem); }
+  .shead .num { font-family: var(--mono); font-size: .8rem; color: var(--accent-ink); letter-spacing: .1em; }
+  .shead h2 { font-family: var(--fr); font-weight: 400; font-size: clamp(2.4rem, 6vw, 4.5rem); letter-spacing: 0; line-height: 1; }
+  .shead .jp { font-family: var(--mono); font-size: .7rem; color: var(--muted); letter-spacing: .16em; text-transform: uppercase; margin-left: auto; align-self: center; }
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-            color: var(--muted);
-            font-size: 14px;
-            font-weight: 500;
-        }
+  .statement { padding: clamp(6rem, 16vh, 12rem) 0; }
+  .statement .big { font-family: var(--min); font-weight: 700; font-size: clamp(2.4rem, 7vw, 6rem); line-height: 1.18; letter-spacing: 0; }
+  .statement .big .a { color: var(--accent); }
+  .statement p { max-width: 32em; margin-top: 2rem; color: var(--muted); font-size: 1rem; line-height: 2; }
 
-        nav a {
-            text-decoration: none;
-        }
+  .works { padding: clamp(3rem, 7vh, 6rem) 0; }
+  .case { display: grid; grid-template-columns: 1.1fr .9fr; gap: 0; border: 1px solid var(--line); background: var(--paper); overflow: hidden; }
+  .case .preview { position: relative; background: var(--dark); min-height: 420px; overflow: hidden; display: flex; align-items: flex-end; padding: 1.6rem; }
+  .case .preview video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .74; filter: saturate(.9) contrast(1.05); }
+  .case .preview .shade { position: absolute; inset: 0; background: radial-gradient(38% 50% at 62% 40%, rgba(243, 178, 119, .26), transparent 62%), linear-gradient(180deg, rgba(14, 18, 25, .12), rgba(14, 18, 25, .82)); }
+  .case .preview .pgrid { position: absolute; inset: 0; opacity: .45; background: repeating-linear-gradient(90deg, rgba(150, 180, 205, .05) 0 24px, transparent 24px 48px), repeating-linear-gradient(0deg, rgba(150, 180, 205, .05) 0 24px, transparent 24px 48px); }
+  .case .preview .pnav { position: absolute; top: 1.2rem; left: 1.6rem; right: 1.6rem; display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: .52rem; letter-spacing: .18em; color: rgba(236, 240, 245, .72); text-transform: uppercase; z-index: 2; }
+  .case .preview .pname { position: relative; z-index: 2; font-family: var(--min); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4rem); color: #eef3f7; line-height: .9; letter-spacing: .03em; transition: transform .6s cubic-bezier(.16, .8, .24, 1); text-shadow: 0 10px 40px rgba(0, 0, 0, .45); }
+  .case:hover .preview .pname { transform: translateY(-6px); }
+  .case .preview .pro { position: relative; z-index: 2; font-family: var(--mono); font-size: .6rem; letter-spacing: .4em; color: #f3b277; margin-top: .5rem; }
+  .case .info { padding: clamp(1.8rem, 3vw, 3rem); display: flex; flex-direction: column; }
+  .case .info .k { font-family: var(--mono); font-size: .6rem; letter-spacing: .16em; color: var(--accent-ink); text-transform: uppercase; }
+  .case .info h3 { font-family: var(--min); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 2rem); margin: .6rem 0 1rem; }
+  .case .info p { color: var(--muted); font-size: .9rem; line-height: 1.9; }
+  .case .info .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.4rem 0; }
+  .case .info .tags span { font-family: var(--mono); font-size: .58rem; letter-spacing: .06em; padding: .45em .9em; border: 1px solid var(--line); border-radius: 99px; color: var(--ink); }
+  .case .info .meta { margin-top: auto; padding-top: 1.4rem; border-top: 1px solid var(--line); display: flex; gap: 2rem; flex-wrap: wrap; font-family: var(--mono); font-size: .62rem; color: var(--muted); }
+  .case .info .meta b { display: block; color: var(--ink); font-weight: 400; margin-top: .2rem; letter-spacing: 0; }
+  .case .info .link { margin-top: 1.4rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; color: var(--accent-ink); display: inline-flex; align-items: center; gap: .5em; transition: gap .3s; }
+  .case .info .link:hover { gap: .9em; }
 
-        nav a:hover { color: var(--accent); }
+  .caps { padding: clamp(4rem, 9vh, 7rem) 0; }
+  .cap { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2.4rem); align-items: baseline; padding: 1.8rem .2rem; border-top: 1px solid var(--line); transition: padding .4s, background .4s; position: relative; }
+  .cap:last-child { border-bottom: 1px solid var(--line); }
+  .cap .n { font-family: var(--mono); font-size: .8rem; color: var(--accent-ink); }
+  .cap .body h4 { font-family: var(--min); font-weight: 700; font-size: clamp(1.15rem, 2vw, 1.6rem); transition: transform .4s; }
+  .cap .body p { color: var(--muted); font-size: .88rem; line-height: 1.8; margin-top: .5rem; max-width: 46em; }
+  .cap::before { content: ""; position: absolute; left: -4vw; top: 0; bottom: 0; width: 3px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform .4s; }
+  .cap:hover { padding-left: 1.2rem; background: rgba(216, 67, 31, .03); }
+  .cap:hover::before { transform: scaleY(1); }
+  .cap:hover .body h4 { transform: translateX(4px); }
 
-        .container {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 0 28px;
-        }
+  .studio { background: var(--dark); color: var(--dark-paper); padding: clamp(5rem, 12vh, 9rem) 0; margin-top: clamp(3rem, 7vh, 6rem); }
+  .studio .shead h2 { color: var(--dark-paper); }
+  .studio .shead .num { color: #f3b277; }
+  .studio .shead .jp { color: var(--dark-muted); }
+  .studio .lead { font-family: var(--min); font-weight: 700; font-size: clamp(2rem, 5.5vw, 4rem); line-height: 1.25; margin-bottom: 3rem; }
+  .studio .lead .a { color: #f3b277; }
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 3rem); }
+  .principles .p { padding-top: 1.4rem; border-top: 1px solid var(--dark-line); }
+  .principles .p .pn { font-family: var(--mono); font-size: .72rem; color: #f3b277; letter-spacing: .1em; }
+  .principles .p h5 { font-family: var(--fr); font-style: italic; font-weight: 400; font-size: 1.35rem; margin: .7rem 0; color: var(--dark-paper); }
+  .principles .p .jpn { font-family: var(--min); font-weight: 700; font-size: 1.05rem; margin-bottom: .6rem; }
+  .principles .p p { color: var(--dark-muted); font-size: .84rem; line-height: 1.9; }
 
-        .hero {
-            padding: 92px 0 72px;
-            border-bottom: 1px solid var(--line);
-        }
+  .marquee { overflow: hidden; border-top: 1px solid var(--dark-line); border-bottom: 1px solid var(--dark-line); background: var(--dark); padding: 1.4rem 0; }
+  .marquee .track { display: flex; gap: 3rem; width: max-content; animation: scroll 30s linear infinite; font-family: var(--min); font-weight: 700; font-size: clamp(1.3rem, 2.6vw, 2.1rem); color: var(--dark-paper); white-space: nowrap; }
+  .marquee .track span { opacity: .9; }
+  .marquee .track .dot { color: #f3b277; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
 
-        .hero-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-            gap: 56px;
-            align-items: end;
-        }
+  .contact { padding: clamp(6rem, 15vh, 11rem) 0; }
+  .contact .big { font-family: var(--min); font-weight: 800; font-size: clamp(2.6rem, 8vw, 6.5rem); line-height: 1.1; letter-spacing: 0; }
+  .contact .big .a { color: var(--accent); }
+  .contact .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .contact p { max-width: 30em; color: var(--muted); line-height: 1.9; font-size: .95rem; }
 
-        .eyebrow {
-            color: var(--accent);
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-        }
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0; }
+  footer .in { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-family: var(--mono); font-size: .66rem; letter-spacing: .08em; color: var(--muted); }
+  footer .in .brand { font-family: var(--fr); font-size: 1.1rem; color: var(--ink); }
 
-        h1 {
-            font-family: "Noto Serif JP", serif;
-            font-size: clamp(36px, 6vw, 68px);
-            font-weight: 600;
-            letter-spacing: 0;
-            line-height: 1.2;
-            max-width: 760px;
-        }
+  @media (max-width: 860px) {
+    .case { grid-template-columns: 1fr; }
+    .case .preview { min-height: 340px; }
+  }
 
-        .lead {
-            color: var(--muted);
-            font-size: 18px;
-            max-width: 660px;
-            margin-top: 26px;
-        }
+  @media (max-width: 760px) {
+    .principles { grid-template-columns: 1fr; gap: 2.5rem; }
+    .shead { align-items: flex-start; flex-direction: column; gap: .8rem; }
+    .shead .jp { margin-left: 0; }
+  }
 
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 16px;
-            margin-top: 34px;
-        }
+  @media (max-width: 720px) {
+    nav .links { display: none; }
+    nav .brand { font-size: 1.2rem; }
+    .hero h1 { font-size: clamp(3rem, 17vw, 5.6rem); }
+    .case .preview .pnav { align-items: flex-start; flex-direction: column; }
+  }
 
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 48px;
-            border-radius: 6px;
-            padding: 0 20px;
-            background: var(--accent);
-            color: #fff;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .button:hover { background: var(--accent-dark); }
-
-        .text-link {
-            color: var(--accent);
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .text-link:hover { text-decoration: underline; }
-
-        .capability-panel {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 28px;
-        }
-
-        .capability-panel p {
-            color: var(--muted);
-            font-size: 15px;
-            margin-bottom: 18px;
-        }
-
-        .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            background: var(--accent-soft);
-            border-radius: 999px;
-            color: var(--accent-dark);
-            display: inline-flex;
-            font-size: 13px;
-            font-weight: 700;
-            line-height: 1.4;
-            padding: 7px 11px;
-        }
-
-        section {
-            padding: 78px 0;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .section-heading {
-            display: grid;
-            grid-template-columns: 220px minmax(0, 1fr);
-            gap: 36px;
-            align-items: start;
-            margin-bottom: 32px;
-        }
-
-        .section-heading h2 {
-            font-family: "Noto Serif JP", serif;
-            font-size: 30px;
-            font-weight: 600;
-            line-height: 1.35;
-        }
-
-        .section-heading p {
-            color: var(--muted);
-            max-width: 700px;
-        }
-
-        .work-card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 260px;
-            overflow: hidden;
-        }
-
-        .work-body {
-            padding: 34px;
-        }
-
-        .work-body h3 {
-            font-family: "Noto Serif JP", serif;
-            font-size: 28px;
-            font-weight: 600;
-            line-height: 1.35;
-            margin-bottom: 12px;
-        }
-
-        .work-body p {
-            color: var(--muted);
-            margin-bottom: 20px;
-            max-width: 720px;
-        }
-
-        .work-meta {
-            background: var(--surface-muted);
-            border-left: 1px solid var(--line);
-            padding: 34px 28px;
-        }
-
-        .meta-label {
-            color: var(--soft);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .work-meta p {
-            color: var(--text);
-            font-size: 15px;
-            line-height: 1.75;
-            margin-bottom: 18px;
-        }
-
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-        }
-
-        .service-card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 24px;
-        }
-
-        .service-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .service-card p {
-            color: var(--muted);
-            font-size: 15px;
-        }
-
-        .contact {
-            background: var(--surface-muted);
-            border-bottom: 0;
-        }
-
-        .contact-box {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 36px;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) auto;
-            gap: 28px;
-            align-items: center;
-        }
-
-        .contact-box h2 {
-            font-family: "Noto Serif JP", serif;
-            font-size: 30px;
-            font-weight: 600;
-            line-height: 1.35;
-            margin-bottom: 10px;
-        }
-
-        .contact-box p {
-            color: var(--muted);
-            max-width: 680px;
-        }
-
-        footer {
-            border-top: 1px solid var(--line);
-            color: var(--soft);
-            font-size: 13px;
-            padding: 28px;
-            text-align: center;
-        }
-
-        @media (max-width: 760px) {
-            .header-inner {
-                align-items: flex-start;
-                flex-direction: column;
-                padding: 16px 20px;
-            }
-
-            nav {
-                flex-wrap: wrap;
-                gap: 14px;
-                font-size: 13px;
-            }
-
-            .container { padding: 0 20px; }
-
-            .hero { padding: 64px 0 50px; }
-
-            .hero-grid,
-            .section-heading,
-            .work-card,
-            .contact-box {
-                grid-template-columns: 1fr;
-            }
-
-            .capability-panel,
-            .work-body,
-            .work-meta,
-            .contact-box {
-                padding: 24px;
-            }
-
-            .work-meta {
-                border-left: 0;
-                border-top: 1px solid var(--line);
-            }
-
-            .service-grid {
-                grid-template-columns: 1fr;
-            }
-
-            section { padding: 56px 0; }
-        }
-    </style>
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="header-inner">
-            <a href="/" class="logo">TonariCraft</a>
-            <nav aria-label="主要ナビゲーション">
-                <a href="#works">Works</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
-            </nav>
+<nav id="nav" aria-label="主要ナビゲーション">
+  <a class="brand" href="/">Tonari<b>Craft</b></a>
+  <div class="links"><a href="#works">Works</a><a href="#caps">Capabilities</a><a href="#studio">Studio</a><a href="#contact">Contact</a></div>
+</nav>
+
+<div class="hero-wrap">
+  <header class="hero">
+    <div class="glow" id="glow"></div>
+    <div class="col content">
+      <p class="eyebrow">Web Design Studio</p>
+      <p class="fr-line" id="frline">We build websites with a world of their own.</p>
+      <h1 id="h1">世界観を、<br>そのまま<span class="a">動かす。</span></h1>
+      <p class="sub" id="sub">見た目のこだわりも、公開したあとの使いやすさも。あなたらしい世界観のあるサイトを、デザインから、ご自身で更新できる形まで、まるごとお作りします。</p>
+      <div class="cta" id="cta">
+        <a class="btn fill" href="#contact">制作を相談する</a>
+        <a class="btn line" href="#works">実績を見る</a>
+      </div>
+    </div>
+    <div class="scrollcue" id="cue">Scroll</div>
+  </header>
+</div>
+
+<main>
+  <section class="statement">
+    <div class="col">
+      <div class="big wipe">「それっぽい」で、<br>終わらせ<span class="a">ない。</span></div>
+      <p class="reveal">テンプレートに当てはめただけのサイトも、公開して終わりのサイトも作りません。あなたらしい世界観と、ずっと更新し続けられる使いやすさを、同じ想いで。デザインする人と作る人が同じだから、細部まで意図が届きます。</p>
+    </div>
+  </section>
+
+  <section class="works" id="works">
+    <div class="col">
+      <div class="shead wipe"><span class="num">I</span><h2>Selected Work</h2><span class="jp">実績</span></div>
+      <article class="case reveal">
+        <div class="preview">
+          <video src="/assets/gensotsu-preview.mp4" autoplay muted loop playsinline preload="metadata" aria-label="幻想痛公式サイトのスクリーン録画"></video>
+          <div class="shade"></div><div class="pgrid"></div>
+          <div class="pnav"><span>幻想痛</span><span>Videos / News / Live / Profile</span></div>
+          <div><div class="pname">幻想痛</div><div class="pro">G E N S O T S U</div></div>
         </div>
-    </header>
+        <div class="info">
+          <span class="k">Official Website</span>
+          <h3>幻想痛 公式サイト</h3>
+          <p>バンドの世界観を軸に、公式サイトをデザインから公開・運用まで一貫してお作りしました。スクロールに反応する印象的なトップ、ライブやお知らせ・グッズ・動画をご本人たちで更新できる仕組み、そして検索で見つけてもらうための準備まで。</p>
+          <div class="tags"><span>世界観デザイン</span><span>動きの演出</span><span>自分で更新</span><span>検索対策</span><span>公開・運用</span></div>
+          <div class="meta">
+            <div>Client<b>アーティスト / バンド</b></div>
+            <div>Year<b>2026</b></div>
+            <div>担当<b>デザイン〜公開・運用</b></div>
+          </div>
+          <a class="link" href="https://gensotsu.com" target="_blank" rel="noopener noreferrer">公開中のサイトを見る -> gensotsu.com</a>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    <main>
-        <section class="hero">
-            <div class="container hero-grid">
-                <div>
-                    <div class="eyebrow">Web implementation and operation support</div>
-                    <h1>小さなチームのための、更新しやすいWebサイト実装</h1>
-                    <p class="lead">TonariCraft は、アーティスト・小規模事業・個人プロジェクト向けに、更新しやすく運用しやすいWebサイトを実装します。</p>
-                    <div class="hero-actions">
-                        <a class="button" href="mailto:support@tonaricraft.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87">制作について相談する</a>
-                        <a class="text-link" href="#works">実績を見る</a>
-                    </div>
-                </div>
-                <aside class="capability-panel" aria-label="対応範囲">
-                    <p>デザインの再現、管理画面、SEO、Cloudflare Workers での公開まで、実装と運用に必要な部分をまとめて支援します。</p>
-                    <div class="tag-list">
-                        <span class="tag">Next.js</span>
-                        <span class="tag">Cloudflare</span>
-                        <span class="tag">管理画面</span>
-                        <span class="tag">SEO</span>
-                        <span class="tag">運用改善</span>
-                    </div>
-                </aside>
-            </div>
-        </section>
+  <section class="caps" id="caps">
+    <div class="col">
+      <div class="shead wipe"><span class="num">II</span><h2>Capabilities</h2><span class="jp">できること</span></div>
+      <div class="cap reveal"><span class="n">01</span><div class="body"><h4>サイトを一から制作</h4><p>ブランドの世界観に合わせて、読みやすく、印象に残るサイトをデザインからお作りします。</p></div></div>
+      <div class="cap reveal"><span class="n">02</span><div class="body"><h4>自分で更新できるサイト</h4><p>ライブ情報やお知らせ、グッズなどを、専門知識がなくてもご自身で追加・修正できる仕組みごとお渡しします。</p></div></div>
+      <div class="cap reveal"><span class="n">03</span><div class="body"><h4>今あるサイトの改善</h4><p>表示崩れ・遅い・スマホで見づらい・更新しづらい。気になる部分だけ整理して、きれいに直します。</p></div></div>
+      <div class="cap reveal"><span class="n">04</span><div class="body"><h4>公開と管理の代行</h4><p>難しい設定や日々の管理はこちらで引き受けます。速く安定して表示され、維持の負担も少なく運びます。</p></div></div>
+      <div class="cap reveal"><span class="n">05</span><div class="body"><h4>検索で見つかる準備</h4><p>検索したときに見つけてもらいやすいよう、公開時に必要な設定を整えます。</p></div></div>
+      <div class="cap reveal"><span class="n">06</span><div class="body"><h4>公開後のサポート</h4><p>公開してからの更新や、ちょっとした手直しを、必要なときだけご相談いただけます。</p></div></div>
+    </div>
+  </section>
 
-        <section id="works">
-            <div class="container">
-                <div class="section-heading">
-                    <h2>Works</h2>
-                    <p>公開後もニュースやライブ情報を更新し続けられることを重視して、必要な管理機能と公開環境を整えています。</p>
-                </div>
+  <section class="studio" id="studio">
+    <div class="col">
+      <div class="shead wipe"><span class="num">III</span><h2>Studio</h2><span class="jp">進め方</span></div>
+      <div class="lead reveal">作って終わり、<br>に<span class="a">しない。</span></div>
+      <div class="principles">
+        <div class="p reveal"><div class="pn">01</div><div class="jpn">世界観から起こす</div><h5>Design from the world</h5><p>既製のテンプレートではなく、伝えたい雰囲気からデザインを組み立てます。だから「どこかで見た感じ」になりません。</p></div>
+        <div class="p reveal"><div class="pn">02</div><div class="jpn">デザインから公開まで一貫</div><h5>From design to launch</h5><p>デザインする人と作る人が同じ。受け渡しで意図が薄まらず、細部まで思いどおりに仕上がります。</p></div>
+        <div class="p reveal"><div class="pn">03</div><div class="jpn">更新できる形でお渡し</div><h5>Made to keep going</h5><p>公開したあとも、ご自身で更新し続けられる形でお渡しします。渡して終わりには、しません。</p></div>
+      </div>
+    </div>
+  </section>
 
-                <article class="work-card">
-                    <div class="work-body">
-                        <h3>幻想痛 公式サイト</h3>
-                        <p>バンド公式サイトの構築、管理画面、ライブ・ニュース・グッズ・動画管理、SEO設定、Cloudflare Workers でのデプロイと運用を担当しています。</p>
-                        <a class="text-link" href="https://gensotsu.com" target="_blank" rel="noopener noreferrer">https://gensotsu.com</a>
-                    </div>
-                    <div class="work-meta">
-                        <div class="meta-label">Scope</div>
-                        <p>News / Live / Discography / Video / Goods の管理画面、SEO、Cloudflare Workers 運用</p>
-                        <div class="meta-label">Client type</div>
-                        <p>アーティスト・バンド公式サイト</p>
-                    </div>
-                </article>
-            </div>
-        </section>
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>世界観のあるデザイン</span><span class="dot">*</span><span>自分で更新できる</span><span class="dot">*</span><span>スマホで見やすい</span><span class="dot">*</span><span>検索で見つかる</span><span class="dot">*</span><span>速くて安定</span><span class="dot">*</span><span>公開後もサポート</span><span class="dot">*</span>
+      <span>世界観のあるデザイン</span><span class="dot">*</span><span>自分で更新できる</span><span class="dot">*</span><span>スマホで見やすい</span><span class="dot">*</span><span>検索で見つかる</span><span class="dot">*</span><span>速くて安定</span><span class="dot">*</span><span>公開後もサポート</span><span class="dot">*</span>
+    </div>
+  </div>
 
-        <section id="services">
-            <div class="container">
-                <div class="section-heading">
-                    <h2>Services</h2>
-                    <p>新規制作だけでなく、既存サイトの改善や公開後の小さな運用相談にも対応します。価格表ではなく、内容を聞いて必要な範囲を絞って進めます。</p>
-                </div>
+  <section class="contact" id="contact">
+    <div class="col">
+      <div class="big wipe">つくりたいものを、<br>聞かせて<span class="a">ください。</span></div>
+      <div class="row">
+        <p class="reveal">新しく作りたい方も、今のサイトを直したい方も。まだ漠然としていても大丈夫です。まずはやりたいことを、メールで気軽にお聞かせください。</p>
+        <a class="btn fill reveal" href="mailto:support@tonaricraft.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87">メールで相談する -></a>
+      </div>
+    </div>
+  </section>
+</main>
 
-                <div class="service-grid">
-                    <article class="service-card">
-                        <h3>Webサイト実装</h3>
-                        <p>デザインや要件に合わせて、読みやすく更新しやすいWebサイトを実装します。</p>
-                    </article>
-                    <article class="service-card">
-                        <h3>管理画面付きサイト</h3>
-                        <p>News、Live、Goods など、日々の更新が必要な情報を管理できる仕組みを整えます。</p>
-                    </article>
-                    <article class="service-card">
-                        <h3>既存サイト改善</h3>
-                        <p>表示崩れ、速度、SEO、更新しづらさなど、運用で困っている部分を整理して改善します。</p>
-                    </article>
-                    <article class="service-card">
-                        <h3>Cloudflare / Next.js デプロイ・運用</h3>
-                        <p>Cloudflare Workers や Next.js の公開、環境変数、ドメイン、継続運用の整備を支援します。</p>
-                    </article>
-                    <article class="service-card">
-                        <h3>SEO / Search Console 初期設定</h3>
-                        <p>メタ情報、構造化データ、サイトマップ、Search Console 登録など、公開時に必要な初期設定を行います。</p>
-                    </article>
-                    <article class="service-card">
-                        <h3>運用サポート</h3>
-                        <p>公開後の更新、軽微な改修、管理画面の改善などを必要なタイミングで相談できます。</p>
-                    </article>
-                </div>
-            </div>
-        </section>
+<footer>
+  <div class="col in">
+    <span class="brand">TonariCraft</span>
+    <span>Web Design Studio</span>
+    <span>&copy; 2026 TonariCraft</span>
+  </div>
+</footer>
 
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="contact-box">
-                    <div>
-                        <h2>制作について相談する</h2>
-                        <p>新規制作、既存サイト改善、管理画面やCloudflare運用の相談など、決まっている範囲だけで構いません。まずはメールで概要をお送りください。</p>
-                    </div>
-                    <a class="button" href="mailto:support@tonaricraft.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87">メールで問い合わせる</a>
-                </div>
-            </div>
-        </section>
-    </main>
+<script>
+(function() {
+  "use strict";
 
-    <footer>
-        &copy; 2026 TonariCraft
-    </footer>
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (value, min, max) => value < min ? min : value > max ? max : value;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .18, rootMargin: "0px 0px -8% 0px" });
+
+  document.querySelectorAll(".reveal,.wipe").forEach((element, index) => {
+    if (reduce) {
+      element.classList.add("in");
+      return;
+    }
+
+    element.style.transitionDelay = (element.classList.contains("cap") || element.classList.contains("p") ? (index % 6) * .05 : 0) + "s";
+    observer.observe(element);
+  });
+
+  const nav = document.getElementById("nav");
+  const wrap = document.querySelector(".hero-wrap");
+  const h1 = document.getElementById("h1");
+  const sub = document.getElementById("sub");
+  const cta = document.getElementById("cta");
+  const fr = document.getElementById("frline");
+  const cue = document.getElementById("cue");
+  const glow = document.getElementById("glow");
+
+  function frame() {
+    const y = window.scrollY;
+    nav.classList.toggle("scrolled", y > 40);
+
+    const rect = wrap.getBoundingClientRect();
+    let progress = clamp(-rect.top / (rect.height - window.innerHeight), 0, 1);
+    if (reduce) progress = 0;
+
+    h1.style.transform = `translateY(${-progress * 7}vh) scale(${1 - progress * .12})`;
+    h1.style.transformOrigin = "left center";
+    fr.style.opacity = String(1 - progress * 1.1);
+    sub.style.opacity = String(1 - progress);
+    sub.style.transform = `translateY(${progress * 10}px)`;
+    cta.style.opacity = String(1 - progress);
+    cue.style.opacity = String(1 - progress * 3);
+    glow.style.transform = `translate(${progress * -8}vw, ${progress * 6}vw) scale(${1 + progress * .3})`;
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
