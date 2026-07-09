@@ -66,10 +66,10 @@
   .hero { border-bottom: 1px solid var(--line); min-height: 78vh; padding: clamp(7rem, 14vh, 10rem) 0 clamp(4rem, 9vh, 7rem); }
 
   .hero-grid {
-    align-items: end;
+    align-items: center;
     display: grid;
-    gap: clamp(2.5rem, 7vw, 6rem);
-    grid-template-columns: minmax(0, 760px) minmax(240px, 360px);
+    gap: clamp(2.5rem, 7vw, 5.5rem);
+    grid-template-columns: minmax(0, 760px) minmax(300px, 420px);
     min-height: calc(78vh - 12rem);
   }
 
@@ -105,13 +105,30 @@
   .btn.fill:hover { background: var(--accent-2); border-color: var(--accent-2); }
   .btn.line:hover { background: var(--ink); color: var(--panel); }
 
-  .hero-note {
-    border-left: 1px solid var(--line);
-    color: var(--muted);
-    font-size: .86rem;
-    line-height: 1.9;
-    padding-left: 1.4rem;
+  .concerns { display: grid; gap: .85rem; }
+  .concerns-title { color: var(--muted); font-family: var(--mono); font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .bubble {
+    background: rgba(251, 250, 246, .74);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-size: .88rem;
+    line-height: 1.75;
+    padding: .95rem 1rem;
+    position: relative;
   }
+  .bubble::before {
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    content: "";
+    height: 10px;
+    left: -6px;
+    position: absolute;
+    top: 1.1rem;
+    transform: rotate(45deg);
+    width: 10px;
+  }
+  .concerns-note { color: var(--muted); font-size: .84rem; line-height: 1.85; margin-top: .35rem; }
 
   section { padding: clamp(4.5rem, 10vh, 8rem) 0; position: relative; }
   .section-head { align-items: end; border-bottom: 1px solid var(--line); display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr) minmax(260px, 520px); margin-bottom: clamp(2rem, 5vw, 3.6rem); padding-bottom: 1.5rem; }
@@ -161,7 +178,6 @@
 
   @media (max-width: 900px) {
     .hero-grid, .section-head, .work-card, .contact-box { grid-template-columns: 1fr; }
-    .hero-note { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; padding-top: 1rem; }
     .work-media { min-height: 360px; }
     .service { grid-template-columns: 3rem 1fr; }
     .service p { grid-column: 2; }
@@ -177,6 +193,7 @@
     .work-meta { grid-template-columns: 1fr; }
     .service { grid-template-columns: 1fr; }
     .service p { grid-column: auto; }
+    .bubble::before { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -203,7 +220,13 @@
         <a class="btn line" href="#works">実績を見る</a>
       </div>
     </div>
-    <p class="hero-note">大きな制作会社ではなく、小さく相談しながら進める制作窓口です。新規制作も、既存サイトの改善も対応します。</p>
+    <aside class="concerns" aria-label="よくある相談">
+      <p class="concerns-title">こんな相談から</p>
+      <p class="bubble">HP作成サービスを触ってみたけれど、思った雰囲気にならない。</p>
+      <p class="bubble">テンプレートっぽくなく、自分たちのイメージに近いサイトにしたい。</p>
+      <p class="bubble">専門知識はないけれど、公開後はニュースやライブ情報を自分で更新したい。</p>
+      <p class="concerns-note">相談しながら必要な範囲に絞って作るので、小さく始めたい方にも向いています。</p>
+    </aside>
   </div>
 </header>
 
