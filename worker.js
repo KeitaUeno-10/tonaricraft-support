@@ -1,5 +1,5 @@
 const MAIL_FROM = 'noreply@tonaricraft.com';
-const MAIL_TO = 'support@tonaricraft.com';
+const MAIL_TO = 'eg5737021414@gmail.com';
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
