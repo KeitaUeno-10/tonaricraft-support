@@ -52,7 +52,13 @@ function makeRawEmail({ name, email, category, message }) {
   ].join('\r\n');
 }
 
-async function handleContact(request, env) {
+async function sendNotification(env, payload) {
+  if (!env.SEB) return;
+  const { EmailMessage } = await import('cloudflare:email');
+  await env.SEB.send(new EmailMessage(MAIL_FROM, MAIL_TO, makeRawEmail(payload)));
+}
+
+async function handleContact(request, env, ctx) {
   let form;
   try {
     form = await request.formData();
@@ -92,23 +98,20 @@ async function handleContact(request, env) {
     .bind(name, email, category, message, createdAt)
     .run();
 
-  if (env.SEB) {
-    const { EmailMessage } = await import('cloudflare:email');
-    try {
-      await env.SEB.send(new EmailMessage(MAIL_FROM, MAIL_TO, makeRawEmail({ name, email, category, message })));
-    } catch (error) {
+  ctx.waitUntil(
+    sendNotification(env, { name, email, category, message }).catch((error) => {
       console.error('[contact] email notification failed after D1 save', error);
-    }
-  }
+    }),
+  );
 
   return json({ ok: true });
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === 'POST' && url.pathname === '/api/contact') {
-      return handleContact(request, env);
+      return handleContact(request, env, ctx);
     }
     return env.ASSETS.fetch(request);
   },
