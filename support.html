@@ -232,6 +232,61 @@
             display: block;
         }
 
+        .modal {
+            align-items: center;
+            background: rgba(36, 35, 34, 0.42);
+            display: none;
+            inset: 0;
+            justify-content: center;
+            padding: 24px;
+            position: fixed;
+            z-index: 100;
+        }
+
+        .modal.is-open {
+            display: flex;
+        }
+
+        .modal__panel {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            box-shadow: 0 24px 80px rgba(36, 35, 34, 0.18);
+            max-width: 440px;
+            padding: 30px;
+            text-align: center;
+            width: min(100%, 440px);
+        }
+
+        .modal__eyebrow {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .modal__title {
+            font-family: "Noto Serif JP", serif;
+            font-size: 26px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .modal__body {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.9;
+            margin: 0 auto;
+        }
+
+        .modal__button {
+            margin-top: 24px;
+            min-width: 160px;
+        }
+
         .hp-field {
             height: 1px;
             left: -9999px;
@@ -374,6 +429,15 @@
         &copy; 2026 TonariCraft
     </footer>
 
+    <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle" aria-describedby="successModalBody">
+        <div class="modal__panel">
+            <p class="modal__eyebrow">Sent</p>
+            <h2 class="modal__title" id="successModalTitle">送信が完了しました</h2>
+            <p class="modal__body" id="successModalBody">内容を確認のうえ、折り返しご連絡します。</p>
+            <button class="button modal__button" type="button" id="successModalClose">閉じる</button>
+        </div>
+    </div>
+
     <script>
         (function() {
             "use strict";
@@ -381,11 +445,30 @@
             const form = document.getElementById("contactForm");
             const message = document.getElementById("formMessage");
             const submit = form.querySelector('button[type="submit"]');
+            const modal = document.getElementById("successModal");
+            const modalClose = document.getElementById("successModalClose");
 
             function show(text, type) {
                 message.textContent = text;
                 message.className = "form-message " + (type === "error" ? "is-error" : "is-success");
             }
+
+            function openSuccessModal() {
+                modal.classList.add("is-open");
+                modalClose.focus();
+            }
+
+            function closeSuccessModal() {
+                modal.classList.remove("is-open");
+            }
+
+            modalClose.addEventListener("click", closeSuccessModal);
+            modal.addEventListener("click", function(event) {
+                if (event.target === modal) closeSuccessModal();
+            });
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Escape" && modal.classList.contains("is-open")) closeSuccessModal();
+            });
 
             form.addEventListener("submit", async function(event) {
                 event.preventDefault();
@@ -403,7 +486,7 @@
                         throw new Error(result.error || "送信に失敗しました。時間をおいて再度お試しください。");
                     }
                     form.reset();
-                    show("送信が完了しました。内容を確認のうえ、折り返しご連絡します。", "success");
+                    openSuccessModal();
                 } catch (error) {
                     show(error instanceof Error ? error.message : "送信に失敗しました。", "error");
                 } finally {
