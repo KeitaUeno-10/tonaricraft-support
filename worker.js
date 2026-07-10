@@ -1,16 +1,5 @@
 const MAIL_FROM = 'noreply@tonaricraft.com';
 const MAIL_TO = 'support@tonaricraft.com';
-const CONTACT_TABLE_SQL = `
-CREATE TABLE IF NOT EXISTS contact_messages (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  category TEXT NOT NULL,
-  message TEXT NOT NULL,
-  created_at TEXT NOT NULL
-);
-CREATE INDEX IF NOT EXISTS contact_messages_created_idx ON contact_messages(created_at);
-`;
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -98,7 +87,6 @@ async function handleContact(request, env) {
     return json({ ok: false, error: '保存先の設定が未完了です。' }, 500);
   }
 
-  await env.DB.exec(CONTACT_TABLE_SQL);
   await env.DB
     .prepare('INSERT INTO contact_messages (name, email, category, message, created_at) VALUES (?, ?, ?, ?, ?)')
     .bind(name, email, category, message, createdAt)
